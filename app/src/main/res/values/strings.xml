@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Otter Airlines</string>
+    <string name="mainTitleText">Welcome to Otter Airlines!</string>
+    <string name="mainImageDescription">An otter holding her newborn</string>
+    <string name="mainAccountButton">Create Account</string>
+    <string name="mainReserveButton">Reserve Seat</string>
+    <string name="mainCancelButton">Cancel Reservation</string>
+    <string name="mainManageButton">Manage System</string>
+    <string name="title_activity_create_account">Sign in</string>
+    <string name="createTitleText">Create Account</string>
+    <string name="createUsernameHint">Enter a username</string>
+    <string name="createInstructExplanation">Please enter a username and password. Both the username
+    and password should have at least 1 number and three alphabetical letters.</string>
+    <string name="createPasswordHint">Enter a password</string>
+    <string name="createSubmitButton">Submit</string>
+</resources>
