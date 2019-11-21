@@ -13,4 +13,5 @@
     and password should have at least 1 number and three alphabetical letters.</string>
     <string name="createPasswordHint">Enter a password</string>
     <string name="createSubmitButton">Submit</string>
+    <string name="createMainDisplay"></string>
 </resources>
