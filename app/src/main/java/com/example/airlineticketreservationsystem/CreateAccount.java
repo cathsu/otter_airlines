@@ -3,13 +3,19 @@ package com.example.airlineticketreservationsystem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.airlineticketreservationsystem.DB.AppDatabase;
 import com.example.airlineticketreservationsystem.DB.UserDAO;
@@ -26,8 +32,11 @@ public class CreateAccount extends AppCompatActivity {
 
     Button mSubmitButton;
 
+    AlertDialog.Builder mAlertBuilder;
+
     UserDAO mUserDAO;
     List<User> mUsers;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,18 @@ public class CreateAccount extends AppCompatActivity {
         mPassword = findViewById(R.id.createPasswordEditText);
 
         mSubmitButton = findViewById(R.id.createSubmitButton);
+
+        mAlertBuilder = new AlertDialog.Builder(CreateAccount.this);
+
+
+        mAlertBuilder.setPositiveButton(R.string.createAlertButtonText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+            }
+        });
+
 
         mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
                 .allowMainThreadQueries()
@@ -66,7 +87,67 @@ public class CreateAccount extends AppCompatActivity {
         username = mUsername.getText().toString();
         password = mPassword.getText().toString();
 
-        mUserDAO.insert(new User(username, password));
+        boolean uniqueLogin = isNewLoginUnique(username, password);
+        boolean correctLogin = isNewLoginCorrect(username, password);
+
+        Log.d(TAG, Boolean.toString(uniqueLogin));
+        Log.d(TAG, Boolean.toString(correctLogin));
+        if (uniqueLogin && correctLogin) {
+            mUserDAO.insert(new User(username, password));
+            Toast t = Toast.makeText(getApplicationContext(), R.string.createAlertSuccessfulAccount, Toast.LENGTH_SHORT);
+            t.setGravity(Gravity.BOTTOM, 0, 0);
+            t.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(CreateAccount.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }, 2000);
+
+
+        } else {
+            if (!uniqueLogin) {
+                mAlertBuilder.setMessage(R.string.createAlertDuplicateLogin);
+            } else //incorrectLogin {
+                mAlertBuilder.setMessage(R.string.createAlertIncorrectLogin);
+
+            mAlertBuilder.show();
+            mUsername.setText(R.string.emptyString);
+            mPassword.setText(R.string.emptyString);
+        }
+
+
+    }
+
+    private boolean isNewLoginUnique(String username, String password) {
+        User user = mUserDAO.findUserWithUsername(username);
+
+        if (user == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isNewLoginCorrect(String username, String password) {
+        return isCredentialValid(username) && isCredentialValid(password);
+    }
+
+    private boolean isCredentialValid(String cred) {
+        int numLetters = 0, numDigits = 0;
+        for (int i = 0; i<cred.length(); i++) {
+            if (Character.isDigit(cred.charAt(i))) {
+                numDigits ++;
+
+            } else if (Character.isLetter(cred.charAt(i))) {
+                numLetters ++;
+            }
+
+        }
+        return (numLetters >= 3 && numDigits >=1);
     }
     private void refreshDisplay() {
         mUsers = mUserDAO.getUsers();

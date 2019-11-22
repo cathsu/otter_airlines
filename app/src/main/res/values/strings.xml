@@ -14,4 +14,9 @@
     <string name="createPasswordHint">Enter a password</string>
     <string name="createSubmitButton">Submit</string>
     <string name="createMainDisplay"></string>
+    <string name="createAlertDuplicateLogin">There is already an account with this username!</string>
+    <string name="createAlertIncorrectLogin">Both the username and password must each contain at least 3 letters and 1 digit!</string>
+    <string name="createAlertButtonText">OK</string>
+    <string name="createAlertSuccessfulAccount">You have created a new account!</string>
+    <string name="emptyString"></string>
 </resources>
