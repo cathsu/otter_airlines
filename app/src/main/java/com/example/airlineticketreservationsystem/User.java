@@ -1,11 +1,14 @@
 package com.example.airlineticketreservationsystem;
 
+import android.util.Log;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.airlineticketreservationsystem.DB.AppDatabase;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(tableName= AppDatabase.USER_TABLE)
 public class User {
@@ -87,8 +90,12 @@ public class User {
             stringBuilder.append("New Login on " + mDate + "\n");
         }
 
+        Log.i("User", "mIsNewAccount" + Boolean.toString(mIsNewAccount));
+
         stringBuilder.append("Username=" + mUsername + "\n" +
                 "Password=" + mPassword + "\n\n");
         return stringBuilder.toString();
     }
+
+
 }
