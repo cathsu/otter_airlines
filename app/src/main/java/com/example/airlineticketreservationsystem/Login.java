@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
@@ -22,9 +24,10 @@ import com.example.airlineticketreservationsystem.DB.UserDAO;
 
 import java.util.List;
 
-public class CreateAccount extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
-    private static final String TAG = "CREATE_ACCOUNT";
+    private static final String TAG = "LOGIN";
+    private static final String USERNAME_KEY = "USERNAME_KEY";
 
     TextView mTitle, mInstructions, mDisplay;
 
@@ -36,25 +39,27 @@ public class CreateAccount extends AppCompatActivity {
 
     UserDAO mUserDAO;
     List<User> mUsers;
+    SharedPreferences mSharedPreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
+        setContentView(R.layout.activity_login);
 
-        mTitle = findViewById(R.id.createTitleTextView);
-        mInstructions = findViewById(R.id.createInstructTextView);
-        mDisplay = findViewById(R.id.createDisplayTextView);
+        mTitle = findViewById(R.id.loginTitleTextView);
+        mDisplay = findViewById(R.id.loginDisplayTextView);
 
         mDisplay.setMovementMethod(new ScrollingMovementMethod());
 
-        mUsername = findViewById(R.id.createUsernameEditText);
-        mPassword = findViewById(R.id.createPasswordEditText);
+        mUsername = findViewById(R.id.loginUsernameEditText);
+        mPassword = findViewById(R.id.loginPasswordEditText);
 
-        mSubmitButton = findViewById(R.id.createSubmitButton);
+        mSubmitButton = findViewById(R.id.loginLoginButton);
 
-        mAlertBuilder = new AlertDialog.Builder(CreateAccount.this);
+        mAlertBuilder = new AlertDialog.Builder(Login.this);
+
+        mSharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
 
 
         mAlertBuilder.setPositiveButton(R.string.createAlertButtonText, new DialogInterface.OnClickListener() {
@@ -74,27 +79,27 @@ public class CreateAccount extends AppCompatActivity {
         refreshDisplay();
     }
 
-    public void create(View view) {
-        submitUserLog();
+    public void validateLogin(View view) {
+        loginToSystem();
         refreshDisplay();
 
 
     }
 
-    private void submitUserLog() {
+    private void loginToSystem() {
         String username, password;
 
         username = mUsername.getText().toString();
         password = mPassword.getText().toString();
 
-        boolean uniqueLogin = isNewLoginUnique(username, password);
-        boolean correctLogin = isNewLoginCorrect(username, password);
+        boolean isLoginCorrect = isLoginCorrect(username, password);
 
-        Log.d(TAG, Boolean.toString(uniqueLogin));
-        Log.d(TAG, Boolean.toString(correctLogin));
-        if (uniqueLogin && correctLogin) {
-            mUserDAO.insert(new User(username, password));
-            Toast t = Toast.makeText(getApplicationContext(), R.string.createAlertSuccessfulAccount, Toast.LENGTH_SHORT);
+        if (isLoginCorrect) {
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putString(USERNAME_KEY, username);
+            editor.apply();
+
+            Toast t = Toast.makeText(getApplicationContext(), R.string.loginSuccessfulLogin, Toast.LENGTH_SHORT);
             t.setGravity(Gravity.BOTTOM, 0, 0);
             t.show();
 
@@ -102,18 +107,14 @@ public class CreateAccount extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(CreateAccount.this, MainActivity.class);
+                    Intent intent = new Intent(Login.this, MainActivity.class);
                     startActivity(intent);
                 }
             }, 2000);
 
 
         } else {
-            if (!uniqueLogin) {
-                mAlertBuilder.setMessage(R.string.createAlertDuplicateLogin);
-            } else //incorrectLogin {
-                mAlertBuilder.setMessage(R.string.createAlertIncorrectLogin);
-
+            mAlertBuilder.setMessage(R.string.loginAlertIncorrectLogin);
             mAlertBuilder.show();
             mUsername.setText(R.string.emptyString);
             mPassword.setText(R.string.emptyString);
@@ -122,33 +123,17 @@ public class CreateAccount extends AppCompatActivity {
 
     }
 
-    private boolean isNewLoginUnique(String username, String password) {
+    private boolean isLoginCorrect(String username, String password) {
         User user = mUserDAO.findUserWithUsername(username);
 
-        if (user == null) {
+        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
             return true;
         } else {
             return false;
         }
     }
 
-    private boolean isNewLoginCorrect(String username, String password) {
-        return isCredentialValid(username) && isCredentialValid(password);
-    }
 
-    private boolean isCredentialValid(String cred) {
-        int numLetters = 0, numDigits = 0;
-        for (int i = 0; i<cred.length(); i++) {
-            if (Character.isDigit(cred.charAt(i))) {
-                numDigits ++;
-
-            } else if (Character.isLetter(cred.charAt(i))) {
-                numLetters ++;
-            }
-
-        }
-        return (numLetters >= 3 && numDigits >=1);
-    }
     private void refreshDisplay() {
         mUsers = mUserDAO.getUsers();
         if (! mUsers.isEmpty() ) {

@@ -4,89 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccount">
+    tools:context=".Login">
 
     <TextView
-        android:id="@+id/createTitleTextView"
+        android:id="@+id/loginTitleTextView"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="@string/createTitleText"
-        android:textAlignment="center"
-        android:textColor="#9C27B0"
-        android:textSize="24sp"
+        android:text="@string/loginMainTitleText"
+        android:textColor="#009688"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/createInstructTextView"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:text="@string/createInstructExplanation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createTitleTextView" />
-
     <EditText
-        android:id="@+id/createUsernameEditText"
+        android:id="@+id/loginUsernameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="@string/createUsernameHint"
+        android:hint="@string/loginUsernameHint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createInstructTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/loginTitleTextView" />
 
     <EditText
-        android:id="@+id/createPasswordEditText"
+        android:id="@+id/loginPasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="@string/createPasswordHint"
+        android:hint="@string/loginPasswordHint"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createUsernameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/loginUsernameEditText" />
 
     <Button
-        android:id="@+id/createSubmitButton"
+        android:id="@+id/loginLoginButton"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         android:onClick="validateLogin"
-        android:text="@string/createSubmitButton"
-        android:textSize="18sp"
+        android:text="@string/loginLoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createPasswordEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordEditText" />
 
     <TextView
-        android:id="@+id/createDisplayTextView"
+        android:id="@+id/loginDisplayTextView"
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/createMainDisplay"
+        android:text="@string/emptyString"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createSubmitButton" />
-
+        app:layout_constraintTop_toBottomOf="@+id/loginLoginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

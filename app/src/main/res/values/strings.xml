@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">Otter Airlines</string>
-    <string name="mainTitleText">Welcome to Otter Airlines!</string>
+    <string name="mainTitleText">Otter Airlines!</string>
     <string name="mainImageDescription">An otter holding her newborn</string>
-    <string name="mainAccountButton">Create Account</string>
+    <string name="mainRegisterButton">Register</string>
+    <string name="mainLoginButton">Login</string>
+    <string name="mainLogoutButton">Logout</string>
     <string name="mainReserveButton">Reserve Seat</string>
     <string name="mainCancelButton">Cancel Reservation</string>
     <string name="mainManageButton">Manage System</string>
+    <string name="mainToastSuccessfulLogout">You\'ve successfully logged out!</string>
+
     <string name="title_activity_create_account">Sign in</string>
     <string name="createTitleText">Create Account</string>
     <string name="createUsernameHint">Enter a username</string>
@@ -13,4 +17,17 @@
     and password should have at least 1 number and three alphabetical letters.</string>
     <string name="createPasswordHint">Enter a password</string>
     <string name="createSubmitButton">Submit</string>
+    <string name="createMainDisplay"></string>
+    <string name="createAlertDuplicateLogin">There is already an account with this username!</string>
+    <string name="createAlertIncorrectLogin">Both the username and password must each contain at least 3 letters and 1 digit!</string>
+    <string name="createAlertButtonText">OK</string>
+    <string name="createAlertSuccessfulAccount">You have created a new account! Please login from the main menu</string>
+    <string name="emptyString"></string>
+
+    <string name="loginMainTitleText">Login</string>
+    <string name="loginUsernameHint">Enter a username</string>
+    <string name="loginPasswordHint">Enter a password</string>
+    <string name="loginLoginButton">Login</string>
+    <string name="loginSuccessfulLogin">You\'ve successfully logged in!</string>
+    <string name="loginAlertIncorrectLogin">Incorrect username and/or password.</string>
 </resources>
