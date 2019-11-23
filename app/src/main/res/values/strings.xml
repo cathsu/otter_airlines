@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Otter Airlines</string>
-    <string name="mainTitleText">Welcome to Otter Airlines!</string>
+    <string name="mainTitleText">Otter Airlines!</string>
     <string name="mainImageDescription">An otter holding her newborn</string>
-    <string name="mainAccountButton">Create Account</string>
+    <string name="mainRegisterButton">Register</string>
+    <string name="mainLoginButton">Login</string>
+    <string name="mainLogoutButton">Logout</string>
     <string name="mainReserveButton">Reserve Seat</string>
     <string name="mainCancelButton">Cancel Reservation</string>
     <string name="mainManageButton">Manage System</string>
