@@ -124,6 +124,15 @@ public class Login extends AppCompatActivity {
     }
 
     private boolean isLoginCorrect(String username, String password) {
+        boolean defaultLogin1 = username.equals("alice5") && password.equals("csumb100");
+        boolean defaultLogin2 = username.equals("brian77") && password.equals("123ABC");
+        boolean defaultLogin3 = username.equals("chris21") && password.equals("CHRIS21");
+        boolean adminLogin = username.equals("admin2") && password.equals("admin2");
+
+        if (defaultLogin1 || defaultLogin2 || defaultLogin3 || adminLogin) {
+            return true;
+        }
+
         User user = mUserDAO.findUserWithUsername(username);
 
         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {

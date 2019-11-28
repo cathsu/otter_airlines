@@ -9,6 +9,7 @@
     <string name="mainCancelButton">Cancel Reservation</string>
     <string name="mainManageButton">Manage System</string>
     <string name="mainToastSuccessfulLogout">You\'ve successfully logged out!</string>
+    <string name="mainCannotManageSystem">Only the admin can manage the system.</string>
 
     <string name="title_activity_create_account">Sign in</string>
     <string name="createTitleText">Create Account</string>
@@ -30,4 +31,11 @@
     <string name="loginLoginButton">Login</string>
     <string name="loginSuccessfulLogin">You\'ve successfully logged in!</string>
     <string name="loginAlertIncorrectLogin">Incorrect username and/or password.</string>
+
+    <string name="logMainTitleText">Logs</string>
+    <string name="logCreateTitleText">Create Account</string>
+    <string name="logReserveTitleText">Reserve Seats</string>
+    <string name="logCancelTitleText">Cancel Reservation</string>
+    <string name="logContinueButton">Continue</string>
+    <string name="logEmptyLogMessage">There are no transactions at this moment</string>
 </resources>
