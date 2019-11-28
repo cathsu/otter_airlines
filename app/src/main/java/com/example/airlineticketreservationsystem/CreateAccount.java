@@ -68,13 +68,14 @@ public class CreateAccount extends AppCompatActivity {
 
         mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build()
                 .getUserDAO();
 
         refreshDisplay();
     }
 
-    public void create(View view) {
+    public void validateAccount(View view) {
         submitUserLog();
         refreshDisplay();
 
@@ -82,6 +83,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void submitUserLog() {
+
         String username, password;
 
         username = mUsername.getText().toString();
@@ -125,7 +127,7 @@ public class CreateAccount extends AppCompatActivity {
     private boolean isNewLoginUnique(String username, String password) {
         User user = mUserDAO.findUserWithUsername(username);
 
-        if (user == null) {
+        if (user == null && !username.equals("admin2")) {
             return true;
         } else {
             return false;

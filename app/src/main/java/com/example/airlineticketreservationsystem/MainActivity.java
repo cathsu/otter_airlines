@@ -87,5 +87,17 @@ public class MainActivity extends AppCompatActivity {
             setLogButtonText();
         }
     }
+
+    public void manageSystem(View view) {
+        String username = mSharedPreferences.getString(USERNAME_KEY, "username");
+
+        if (username.equals("admin2")) {
+            Intent intent = new Intent(MainActivity.this, TransactionLogs.class);
+            startActivity(intent);
+        } else {
+            Toast t = Toast.makeText(this, R.string.mainCannotManageSystem, Toast.LENGTH_SHORT);
+            t.show();
+        }
+    }
 }
 

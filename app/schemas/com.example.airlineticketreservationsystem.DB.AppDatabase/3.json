@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "ac8f7f3315b6b16d01cf21e761ed9624",
+    "version": 3,
+    "identityHash": "747edf7f22844684249fcdb44e7bc704",
     "entities": [
       {
         "tableName": "user",
@@ -53,31 +53,11 @@
         },
         "indices": [],
         "foreignKeys": []
-      },
-      {
-        "tableName": "flight",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "mId",
-            "columnName": "mId",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "mId"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ac8f7f3315b6b16d01cf21e761ed9624\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"747edf7f22844684249fcdb44e7bc704\")"
     ]
   }
 }
