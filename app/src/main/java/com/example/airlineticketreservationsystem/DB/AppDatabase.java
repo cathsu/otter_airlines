@@ -18,6 +18,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDAO getUserDAO();
 
-    public abstract FlightDAO getFlightDAO();
+
+
+
+
 
 }

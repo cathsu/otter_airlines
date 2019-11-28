@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "102465ffa27a4914807ca068e7aa01eb",
+    "identityHash": "ac8f7f3315b6b16d01cf21e761ed9624",
     "entities": [
       {
         "tableName": "user",
@@ -56,55 +56,13 @@
       },
       {
         "tableName": "flight",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mDeparture` TEXT, `mArrival` TEXT, `mDepartureTime` TEXT, `mNumber` INTEGER NOT NULL, `mCapacity` INTEGER NOT NULL, `mPrice` REAL NOT NULL, `mDate` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "mId",
             "columnName": "mId",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "mDeparture",
-            "columnName": "mDeparture",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "mArrival",
-            "columnName": "mArrival",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "mDepartureTime",
-            "columnName": "mDepartureTime",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "mNumber",
-            "columnName": "mNumber",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mCapacity",
-            "columnName": "mCapacity",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mPrice",
-            "columnName": "mPrice",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mDate",
-            "columnName": "mDate",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -119,7 +77,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"102465ffa27a4914807ca068e7aa01eb\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ac8f7f3315b6b16d01cf21e761ed9624\")"
     ]
   }
 }

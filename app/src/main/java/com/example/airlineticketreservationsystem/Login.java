@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
 
         mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build()
                 .getUserDAO();
 
