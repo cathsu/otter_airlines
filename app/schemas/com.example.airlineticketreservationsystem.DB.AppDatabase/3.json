@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "747edf7f22844684249fcdb44e7bc704",
+    "identityHash": "e56e8f8d9ff3d9794d8fe0ae96e8268d",
     "entities": [
       {
         "tableName": "user",
@@ -53,11 +53,73 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "flight",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mNumber` TEXT, `mDeparture` TEXT, `mArrival` TEXT, `mDepartureTime` TEXT, `mCapacity` INTEGER NOT NULL, `mPrice` REAL NOT NULL, `mDate` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "mId",
+            "columnName": "mId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mNumber",
+            "columnName": "mNumber",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mDeparture",
+            "columnName": "mDeparture",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mArrival",
+            "columnName": "mArrival",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mDepartureTime",
+            "columnName": "mDepartureTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mCapacity",
+            "columnName": "mCapacity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mPrice",
+            "columnName": "mPrice",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mDate",
+            "columnName": "mDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"747edf7f22844684249fcdb44e7bc704\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e56e8f8d9ff3d9794d8fe0ae96e8268d\")"
     ]
   }
 }

@@ -12,19 +12,24 @@ import java.util.List;
 
 @Dao
 public interface FlightDAO {
-//    @Insert
-//    void insert(Flight... flights);
-//
-//    @Update
-//    void update(Flight... flights);
-//
-//    @Delete
-//    void delete(Flight flight);
+    @Insert
+    void insert(Flight... flights);
 
-//    @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE)
-//    List<Flight> getFlights();
+    @Update
+    void update(Flight... flights);
 
-//    @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE + " WHERE mId = :logID")
-//    Flight getQuestionWithId(int logID);
+    @Delete
+    void delete(Flight flight);
 
+    @Query("DELETE FROM Flight")
+    void deleteAll();
+
+    @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE)
+    List<Flight> getFlights();
+
+    @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE + " WHERE mId = :logID")
+    Flight getQuestionWithId(int logID);
+
+    @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE+ " WHERE mNumber = :flightNumber")
+    Flight findFlightWithNumber(String flightNumber);
 }

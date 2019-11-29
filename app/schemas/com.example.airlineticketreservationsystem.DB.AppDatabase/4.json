@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 2,
-    "identityHash": "102465ffa27a4914807ca068e7aa01eb",
+    "version": 4,
+    "identityHash": "e56e8f8d9ff3d9794d8fe0ae96e8268d",
     "entities": [
       {
         "tableName": "user",
@@ -56,13 +56,19 @@
       },
       {
         "tableName": "flight",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mDeparture` TEXT, `mArrival` TEXT, `mDepartureTime` TEXT, `mNumber` INTEGER NOT NULL, `mCapacity` INTEGER NOT NULL, `mPrice` REAL NOT NULL, `mDate` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mNumber` TEXT, `mDeparture` TEXT, `mArrival` TEXT, `mDepartureTime` TEXT, `mCapacity` INTEGER NOT NULL, `mPrice` REAL NOT NULL, `mDate` INTEGER)",
         "fields": [
           {
             "fieldPath": "mId",
             "columnName": "mId",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "mNumber",
+            "columnName": "mNumber",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "mDeparture",
@@ -81,12 +87,6 @@
             "columnName": "mDepartureTime",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "mNumber",
-            "columnName": "mNumber",
-            "affinity": "INTEGER",
-            "notNull": true
           },
           {
             "fieldPath": "mCapacity",
@@ -119,7 +119,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"102465ffa27a4914807ca068e7aa01eb\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e56e8f8d9ff3d9794d8fe0ae96e8268d\")"
     ]
   }
 }

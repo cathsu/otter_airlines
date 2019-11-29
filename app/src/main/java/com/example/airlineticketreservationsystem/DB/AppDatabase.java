@@ -8,7 +8,7 @@ import com.example.airlineticketreservationsystem.DB.typeconverter.DateTypeConve
 import com.example.airlineticketreservationsystem.Flight;
 import com.example.airlineticketreservationsystem.User;
 
-@Database(entities = {User.class, Flight.class}, version=2)
+@Database(entities = {User.class, Flight.class}, version=4)
 @TypeConverters(DateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DBNAME ="db-airline";
@@ -17,6 +17,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String FLIGHT_TABLE = "flight";
 
     public abstract UserDAO getUserDAO();
+
+    public abstract FlightDAO getFlightDAO();
 
 
 

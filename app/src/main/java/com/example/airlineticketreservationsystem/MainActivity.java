@@ -88,6 +88,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void reserveSeat(View view) {
+        String username = mSharedPreferences.getString(USERNAME_KEY, "username");
+
+        //TODO: Fix
+        if (username.equals("admin2")) {
+            Intent intent = new Intent(MainActivity.this, ReserveSeats.class);
+            startActivity(intent);
+        } else {
+            Toast t = Toast.makeText(this, R.string.mainAdminCannotReserve, Toast.LENGTH_SHORT);
+            t.show();
+        }
+
+    }
+
     public void manageSystem(View view) {
         String username = mSharedPreferences.getString(USERNAME_KEY, "username");
 

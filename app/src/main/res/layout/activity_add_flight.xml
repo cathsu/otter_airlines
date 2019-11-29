@@ -6,4 +6,244 @@
     android:layout_height="match_parent"
     tools:context=".AddFlight">
 
+    <TextView
+        android:id="@+id/flightTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/flightTitleText"
+        android:textColor="#9C27B0"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/flightNumberTextView"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/flightNumberText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flightNumberEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightTitleTextView" />
+
+    <EditText
+        android:id="@+id/flightNumberEditText"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/flightNumberText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flightNumberTextView"
+        app:layout_constraintTop_toBottomOf="@+id/flightTitleTextView" />
+
+    <TextView
+        android:id="@+id/flightDepartTextView"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center|right"
+        android:text="@string/flightDepartText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flightDepartEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightNumberTextView" />
+
+    <EditText
+        android:id="@+id/flightDepartEditText"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/flightDepartText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flightDepartTextView"
+        app:layout_constraintTop_toBottomOf="@+id/flightNumberEditText" />
+
+    <TextView
+        android:id="@+id/flightArrivalTextView"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center|right"
+        android:text="@string/flightArrivalText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flightArrivalEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightDepartTextView" />
+
+    <EditText
+        android:id="@+id/flightArrivalEditText"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/flightArrivalText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flightArrivalTextView"
+        app:layout_constraintTop_toBottomOf="@+id/flightDepartEditText" />
+
+    <TextView
+        android:id="@+id/flightDepartTimeTextView"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center|right"
+        android:text="@string/flightDepartTimeText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flightDepartTimeEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightArrivalTextView" />
+
+    <EditText
+        android:id="@+id/flightDepartTimeEditText"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:hint="@string/flightDepartTimeHint"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/flightDepartTimeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/flightArrivalEditText" />
+
+    <RadioGroup
+        android:id="@+id/flightRadioGroup"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flightDepartTimeEditText"
+        app:layout_constraintTop_toBottomOf="@+id/flightArrivalEditText">
+
+        <RadioButton
+            android:id="@+id/flightAMRadioButton"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/flightAMText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/flightDepartTimeEditText"
+            app:layout_constraintTop_toBottomOf="@+id/flightArrivalEditText" />
+
+        <RadioButton
+            android:id="@+id/flightPMRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/flightPMText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/flightDepartTimeEditText"
+            app:layout_constraintTop_toBottomOf="@+id/flightAMRadioButton" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/flightCapacityTextView"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center|right"
+        android:text="@string/flightCapacityText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flightCapacityEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightDepartTimeTextView" />
+
+    <EditText
+        android:id="@+id/flightCapacityEditText"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/flightCapacityText"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flightCapacityTextView"
+        app:layout_constraintTop_toBottomOf="@+id/flightDepartTimeEditText" />
+
+    <TextView
+        android:id="@+id/flightPriceTextView"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center|right"
+        android:text="@string/flightPriceText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/flightPriceEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightCapacityTextView" />
+
+    <EditText
+        android:id="@+id/flightPriceEditText"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/flightPriceText"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flightPriceTextView"
+        app:layout_constraintTop_toBottomOf="@+id/flightCapacityEditText" />
+
+    <Button
+        android:id="@+id/flightSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="addNewFlight"
+        android:text="@string/flightButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightPriceTextView" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
