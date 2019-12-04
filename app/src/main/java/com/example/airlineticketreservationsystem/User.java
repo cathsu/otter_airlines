@@ -22,14 +22,12 @@ public class User {
     private boolean mIsAdmin;
     private boolean mIsNewAccount;
 
-    private Date mDate;
 
     public User(String username, String password) {
         mUsername = username;
         mPassword = password;
         mIsAdmin = (mUsername.equals("admin2") && mPassword.equals("admin2")) ? true: false;
         mIsNewAccount = true;
-        mDate = new Date();
     }
 
     public int getId() {
@@ -72,28 +70,11 @@ public class User {
         mIsNewAccount = newAccount;
     }
 
-    public Date getDate() {
-        return mDate;
-    }
-
-    public void setDate(Date date) {
-        mDate = date;
-    }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        if (mIsNewAccount) {
-            stringBuilder.append("New Account Created on " + mDate + "\n");
-            mIsNewAccount = false;
-        } else {
-            stringBuilder.append("New Login on " + mDate + "\n");
-        }
-
-        Log.i("User", "mIsNewAccount" + Boolean.toString(mIsNewAccount));
-
-        stringBuilder.append("Username=" + mUsername + "\n" +
-                "Password=" + mPassword + "\n\n");
+        stringBuilder.append("Username=" + mUsername);
         return stringBuilder.toString();
     }
 

@@ -16,7 +16,6 @@ public class Flight {
     private String mNumber, mDeparture, mArrival, mDepartureTime;
     private int mCapacity;
     private double mPrice;
-    private Date mDate;
 
 
     public Flight(String number,String departure, String arrival, String departureTime, int capacity, double price) {
@@ -26,7 +25,6 @@ public class Flight {
         mDepartureTime = departureTime;
         mCapacity = capacity;
         mPrice = price;
-        mDate = new Date();
     }
 
     public int getId() {
@@ -85,23 +83,14 @@ public class Flight {
         mPrice = price;
     }
 
-    public Date getDate() {
-        return mDate;
-    }
-
-    public void setDate(Date date) {
-        mDate = date;
-    }
-
     @Override
     public String toString() {
         return "Flight" + '\n' +
-                "mNumber=" + mNumber + '\n' +
-                "mDeparture='" + mDeparture + '\n' +
-                "mArrival='" + mArrival + '\n' +
-                "mDepartureTime='" + mDepartureTime + '\n' +
-                "mCapacity=" + mCapacity + '\n' +
-                "mPrice=" + mPrice + '\n' +
-                "mDate=" + mDate + "\n\n";
+                "Flight Number: " + mNumber + '\n' +
+                "Departure: " + mDeparture + '\n' +
+                "Arrival: " + mArrival + '\n' +
+                "Departure Time: " + mDepartureTime + '\n' +
+                "Capacity: " + mCapacity + '\n' +
+                "mPrice: " + mPrice;
     }
 }

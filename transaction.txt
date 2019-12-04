@@ -1,0 +1,33 @@
+Transaction (Singleton) 
+
+Types of Transaction: Create Account, Login, Reserve Seat, Cancel Reservation 
+
+
+// static variable 
+private StringBuilder log = new StringBuilder(); 
+private static Transaction transaction = new Transaction(); 
+
+private Transaction() {}
+
+public static Transaction getInstance() {
+	return transaction; 
+}
+
+public void addNewAccountTransaction() {
+}
+
+public void addLoginTransaction() {
+}
+
+public void addReserveSeatTransaction() {
+}
+
+public void addCancelReservationTransaction() {
+}
+
+public void addNewFlightTransaction() {
+}
+
+public String toString() {
+	return log; 
+}

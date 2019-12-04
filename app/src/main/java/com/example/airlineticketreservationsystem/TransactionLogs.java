@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.airlineticketreservationsystem.DB.AppDatabase;
+import com.example.airlineticketreservationsystem.DB.TransactionDAO;
 import com.example.airlineticketreservationsystem.DB.UserDAO;
 
 import java.util.List;
@@ -22,48 +23,37 @@ public class TransactionLogs extends AppCompatActivity {
 
     Button mButton;
 
-    UserDAO mUserDAO;
-    List<User> mUsers;
-
+    TransactionDAO mTransactionDAO;
+    List<Transaction>mTransactions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_logs);
 
         mMainTitle = findViewById(R.id.logTitleTextView);
-        mCreateTitle = findViewById(R.id.logCreateTitleTextView);
-        mReserveTitle = findViewById(R.id.logReserveTitleTextView);
-        mCancelTitle = findViewById(R.id.logCancelTitleTextView);
-        mCreateDisplay = findViewById(R.id.logCreateDisplayTextView);
-        mReserveDisplay = findViewById(R.id.logReserveDisplayTextView);
-        mCancelDisplay = findViewById(R.id.logCancelDisplayTextView);
+        mCreateDisplay = findViewById(R.id.logDisplayTextView);
 
         mCreateDisplay.setMovementMethod(new ScrollingMovementMethod());
-        mReserveDisplay.setMovementMethod(new ScrollingMovementMethod());
-        mCancelDisplay.setMovementMethod(new ScrollingMovementMethod());
-
         mButton = findViewById(R.id.logButton);
 
-        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
+        mTransactionDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build()
-                .getUserDAO();
+                .getTransactionDAO();
 
         refreshCreateDisplay();
 
     }
 
     private void refreshCreateDisplay() {
-        mUsers = mUserDAO.getUsers();
-        if (! mUsers.isEmpty() ) {
+        mTransactions = mTransactionDAO.getTransaction();
+        if (! mTransactions.isEmpty() ) {
             StringBuilder stringBuilder = new StringBuilder();
-            for (User user: mUsers) {
-                stringBuilder.append(user.toString());
+            for (Transaction transaction: mTransactions) {
+                stringBuilder.append(transaction.toString());
             }
-
             mCreateDisplay.setText(stringBuilder.toString());
-
         } else {
             mCreateDisplay.setText(R.string.logEmptyLogMessage);
         }

@@ -130,18 +130,33 @@ public class AddFlight extends AppCompatActivity {
         Log.d("Flight", departureTimeString.toString());
         if (areFieldsFilled && isNumberUnique) {
             mFlightsDAO.insert(new Flight(number, departure, arrival, departureTimeString.toString(), capacity, price));
-            Toast t = Toast.makeText(getApplicationContext(), R.string.flightToastCreateNewFlight, Toast.LENGTH_SHORT);
-            t.setGravity(Gravity.BOTTOM, 0, 0);
-            t.show();
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
+            mAlertBuilder = new AlertDialog.Builder(AddFlight.this);
+            mAlertBuilder.setMessage("Flight Number: " + number + "\n"
+                                    + "Departure: " + departure + "\n"
+                                    + "Arrival: " + arrival + "\n"
+                                    + "Departure Time: " + departureTimeString.toString() + "\n"
+                                    + "Capacity: " + capacity + "\n"
+                                    + "Price of 1 ticket: $" + price);
+            mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
-                public void run() {
-                    Intent intent = new Intent(AddFlight.this, MainActivity.class);
-                    startActivity(intent);
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast t = Toast.makeText(getApplicationContext(), R.string.flightToastCreateNewFlight, Toast.LENGTH_SHORT);
+                    t.setGravity(Gravity.BOTTOM, 0, 0);
+                    t.show();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(AddFlight.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }, 2000);
                 }
-            }, 2000);
+            });
+            mAlertBuilder.create();
+            mAlertBuilder.show();
+
         } else {
             if (!areFieldsFilled) {
                 mAlertBuilder.setMessage(R.string.flightAlertFieldsNotFilled);

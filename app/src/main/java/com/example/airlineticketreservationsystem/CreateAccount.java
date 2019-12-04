@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.airlineticketreservationsystem.DB.AppDatabase;
+import com.example.airlineticketreservationsystem.DB.TransactionDAO;
 import com.example.airlineticketreservationsystem.DB.UserDAO;
 
 import java.util.List;
@@ -36,6 +37,9 @@ public class CreateAccount extends AppCompatActivity {
 
     UserDAO mUserDAO;
     List<User> mUsers;
+
+    TransactionDAO mTransactionDAO;
+    List<User> mTransactions;
 
 
     @Override
@@ -72,6 +76,12 @@ public class CreateAccount extends AppCompatActivity {
                 .build()
                 .getUserDAO();
 
+        mTransactionDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build()
+                .getTransactionDAO();
+
         refreshDisplay();
     }
 
@@ -95,7 +105,9 @@ public class CreateAccount extends AppCompatActivity {
         Log.d(TAG, Boolean.toString(uniqueLogin));
         Log.d(TAG, Boolean.toString(correctLogin));
         if (uniqueLogin && correctLogin) {
-            mUserDAO.insert(new User(username, password));
+            User user = new User(username, password);
+            mUserDAO.insert(user);
+            mTransactionDAO.insert(new Transaction(username, getString(R.string.TYPE_NEW_ACCOUNT), user.toString()));
             Toast t = Toast.makeText(getApplicationContext(), R.string.createAlertSuccessfulAccount, Toast.LENGTH_SHORT);
             t.setGravity(Gravity.BOTTOM, 0, 0);
             t.show();

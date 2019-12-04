@@ -59,4 +59,14 @@
     <string name="flightAlertFieldsNotFilled">You have not filled in all the required fields!</string>
     <string name="flightAlertDuplicateID">There is already a flight with this number!</string>
     <string name="flightAlertButtonText">OK</string>
+
+
+    <string name="TYPE_NEW_ACCOUNT">Type: New Account"</string>
+    <string name="TYPE_RESERVE_SEAT">Type: Reserve Seat"</string>
+    <string name="TYPE_CANCEL_RESERVATION">Type: Cancel Reservation"</string>
+
+    <string name="reserveTitleText">Reserve Seats</string>
+    <string name="reserveInstruction">Enter the flight number</string>
+    <string name="reserveButtonText">Reserve</string>
+
 </resources>
