@@ -107,7 +107,7 @@ public class CreateAccount extends AppCompatActivity {
         if (uniqueLogin && correctLogin) {
             User user = new User(username, password);
             mUserDAO.insert(user);
-            mTransactionDAO.insert(new Transaction(username, getString(R.string.TYPE_NEW_ACCOUNT), user.toString()));
+            mTransactionDAO.insert(new Transaction( username, getString(R.string.TYPE_NEW_ACCOUNT), user.toString()));
             Toast t = Toast.makeText(getApplicationContext(), R.string.createAlertSuccessfulAccount, Toast.LENGTH_SHORT);
             t.setGravity(Gravity.BOTTOM, 0, 0);
             t.show();

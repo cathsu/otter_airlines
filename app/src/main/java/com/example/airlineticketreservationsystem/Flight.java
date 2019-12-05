@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.airlineticketreservationsystem.DB.AppDatabase;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 @Entity(tableName = AppDatabase.FLIGHT_TABLE)
@@ -85,12 +86,13 @@ public class Flight {
 
     @Override
     public String toString() {
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
         return "Flight" + '\n' +
                 "Flight Number: " + mNumber + '\n' +
                 "Departure: " + mDeparture + '\n' +
                 "Arrival: " + mArrival + '\n' +
                 "Departure Time: " + mDepartureTime + '\n' +
                 "Capacity: " + mCapacity + '\n' +
-                "mPrice: " + mPrice;
+                "Price: $" + decimalFormat.format(mPrice);
     }
 }

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO: Fix
         if (username.equals("admin2")) {
-            Intent intent = new Intent(MainActivity.this, ReserveSeats.class);
+            Intent intent = new Intent(MainActivity.this, FlightCriteria.class);
             startActivity(intent);
         } else {
             Toast t = Toast.makeText(this, R.string.mainAdminCannotReserve, Toast.LENGTH_SHORT);

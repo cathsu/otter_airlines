@@ -76,6 +76,7 @@ public class Transaction {
     public String toString() {
         return mDate + "\n"
                 + mType + "\n"
-                + mMessage;
+                + mMessage + "\n"
+                + "----------------------------------" + "\n";
     }
 }

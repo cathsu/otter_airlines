@@ -32,4 +32,7 @@ public interface FlightDAO {
 
     @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE+ " WHERE mNumber = :flightNumber")
     Flight findFlightWithNumber(String flightNumber);
+
+    @Query("SELECT * FROM " + AppDatabase.FLIGHT_TABLE + " WHERE mDeparture = :departure AND mArrival =:arrival AND mCapacity >= :tickets")
+    List<Flight> findFlightsThatMeetCriteria(String departure, String arrival, int tickets);
 }

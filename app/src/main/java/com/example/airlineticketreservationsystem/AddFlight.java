@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.example.airlineticketreservationsystem.DB.AppDatabase;
 import com.example.airlineticketreservationsystem.DB.FlightDAO;
 
+import java.text.DecimalFormat;
+
 public class AddFlight extends AppCompatActivity {
 
     TextView mTitle, mFlightNumberText, mDepartureText, mArrivalText, mDepartureTimeText, mCapacityText, mPriceText;
@@ -131,12 +133,12 @@ public class AddFlight extends AppCompatActivity {
         if (areFieldsFilled && isNumberUnique) {
             mFlightsDAO.insert(new Flight(number, departure, arrival, departureTimeString.toString(), capacity, price));
             mAlertBuilder = new AlertDialog.Builder(AddFlight.this);
+            DecimalFormat decimalFormat = new DecimalFormat("#.00");
             mAlertBuilder.setMessage("Flight Number: " + number + "\n"
-                                    + "Departure: " + departure + "\n"
+                                    + "Departure: " + departure + " at " + departureTimeString.toString() + "\n"
                                     + "Arrival: " + arrival + "\n"
-                                    + "Departure Time: " + departureTimeString.toString() + "\n"
                                     + "Capacity: " + capacity + "\n"
-                                    + "Price of 1 ticket: $" + price);
+                                    + "Price of 1 ticket: $" + decimalFormat.format(price));
             mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
