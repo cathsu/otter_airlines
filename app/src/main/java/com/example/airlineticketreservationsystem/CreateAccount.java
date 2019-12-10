@@ -49,9 +49,6 @@ public class CreateAccount extends AppCompatActivity {
 
         mTitle = findViewById(R.id.createTitleTextView);
         mInstructions = findViewById(R.id.createInstructTextView);
-        mDisplay = findViewById(R.id.createDisplayTextView);
-
-        mDisplay.setMovementMethod(new ScrollingMovementMethod());
 
         mUsername = findViewById(R.id.createUsernameEditText);
         mPassword = findViewById(R.id.createPasswordEditText);
@@ -82,13 +79,10 @@ public class CreateAccount extends AppCompatActivity {
                 .build()
                 .getTransactionDAO();
 
-        refreshDisplay();
     }
 
     public void validateAccount(View view) {
         submitUserLog();
-        refreshDisplay();
-
 
     }
 
@@ -104,6 +98,8 @@ public class CreateAccount extends AppCompatActivity {
 
         Log.d(TAG, Boolean.toString(uniqueLogin));
         Log.d(TAG, Boolean.toString(correctLogin));
+
+        // If the login is unique + fulfills username/password requirements, add new login to list of users.
         if (uniqueLogin && correctLogin) {
             User user = new User(username, password);
             mUserDAO.insert(user);
@@ -121,7 +117,7 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }, 2000);
 
-
+        // Otherwise, show error message and reset text fields.
         } else {
             if (!uniqueLogin) {
                 mAlertBuilder.setMessage(R.string.createAlertDuplicateLogin);
@@ -136,7 +132,17 @@ public class CreateAccount extends AppCompatActivity {
 
     }
 
+
     private boolean isNewLoginUnique(String username, String password) {
+        // Built-in logins
+        boolean defaultLogin1 = username.equals("alice5");
+        boolean defaultLogin2 = username.equals("brian77");
+        boolean defaultLogin3 = username.equals("chris21");
+        boolean adminLogin = username.equals("admin2");
+
+        if (defaultLogin1 || defaultLogin2 || defaultLogin3 || adminLogin) {
+            return false;
+        }
         User user = mUserDAO.findUserWithUsername(username);
 
         if (user == null && !username.equals("admin2")) {
@@ -162,19 +168,5 @@ public class CreateAccount extends AppCompatActivity {
 
         }
         return (numLetters >= 3 && numDigits >=1);
-    }
-    private void refreshDisplay() {
-        mUsers = mUserDAO.getUsers();
-        if (! mUsers.isEmpty() ) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (User user: mUsers) {
-                stringBuilder.append(user.toString());
-            }
-
-            mDisplay.setText(stringBuilder.toString());
-
-        } else {
-            mDisplay.setText("Empty log");
-        }
     }
 }

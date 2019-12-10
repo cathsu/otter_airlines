@@ -68,10 +68,10 @@ public class Reservation {
 
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
-        return "Reservation Number: " + mId + "\n"
+        return "Reservation Number: " + getId() + "\n"
                 + "Customer Username: " + mUsername + "\n"
                 + "Flight Number: " + mFlightNo + "\n"
                 + "Number of Tickets: " + mSeats + "\n"
-                + "Total Cost: $" + decimalFormat.format(mCost);
+                + "Total Cost: $" + decimalFormat.format(mCost) + "\n";
     }
 }

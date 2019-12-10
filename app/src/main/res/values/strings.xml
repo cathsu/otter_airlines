@@ -10,7 +10,7 @@
     <string name="mainManageButton">Manage System</string>
     <string name="mainToastSuccessfulLogout">You\'ve successfully logged out!</string>
     <string name="mainCannotManageSystem">Only the admin can manage the system.</string>
-    <string name="mainAdminCannotReserve">This is for customers only!</string>
+    <string name="mainAdminCannotReserveCancel">This is for customers only!</string>
 
     <string name="title_activity_create_account">Sign in</string>
     <string name="createTitleText">Create Account</string>
@@ -49,7 +49,7 @@
     <string name="flightAMText">AM</string>
     <string name="flightPMText">PM</string>
     <string name="flightCapacityText">Capacity</string>
-    <string name="flightPriceText">Price</string>
+    <string name="flightPriceText">Price (in $)</string>
     <string name="flightButton">Submit</string>
     <string name="flightAlertQuestionText">Would you like to add a new flight?</string>
     <string name="flightToastExitMessage">Returning to the main menu...</string>
@@ -75,5 +75,9 @@
     <string name="reserveTitleText">Reserve Seats</string>
     <string name="reserveInstruction">Enter the flight number</string>
     <string name="reserveButtonText">Reserve</string>
+
+    <string name="cancelTitleText">Cancel Reservation</string>
+    <string name="cancelInstruction">Enter the flight number</string>
+    <string name="cancelFlightButtonText">Cancel</string>
 
 </resources>

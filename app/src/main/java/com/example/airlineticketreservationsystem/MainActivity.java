@@ -1,6 +1,24 @@
+/** Citations
+ * Delay
+ * - https://stackoverflow.com/questions/17237287/how-can-i-wait-for-10-second-without-locking-application-ui-in-android
+ *
+ * Login/Logout:
+ * - https://www.tutorialspoint.com/android/android_session_management.htm
+ * - https://stackoverflow.com/questions/12074156/android-storing-retrieving-strings-with-shared-preferences
+ * - https://www.tutorialspoint.com/how-to-pass-data-from-one-activity-to-another-in-android-using-shared-preferences
+ * - https://stackoverflow.com/questions/46011023/i-am-trying-to-pass-the-values-in-shared-preference-from-one-activity-to-another
+ *
+ * Creating a RadioGroup:
+ * - https://developer.android.com/guide/topics/ui/controls/radiobutton
+ *
+ * Check which RadioButton in the RadioGroup is selected
+ * - https://stackoverflow.com/questions/42502055/how-to-check-which-radio-button-of-a-radio-group-is-selected-android
+ */
+
 package com.example.airlineticketreservationsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +32,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.example.airlineticketreservationsystem.DB.AppDatabase;
+import com.example.airlineticketreservationsystem.DB.FlightDAO;
+import com.example.airlineticketreservationsystem.DB.ReservationDAO;
+import com.example.airlineticketreservationsystem.DB.TransactionDAO;
+import com.example.airlineticketreservationsystem.DB.UserDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,10 +77,40 @@ public class MainActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CreateAccount.class);
-                startActivity(intent);
+                if (!mSharedPreferences.contains(USERNAME_KEY)) {
+                    Intent intent = new Intent(MainActivity.this, CreateAccount.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "You are logged in!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+        // Uncomment for testing purposes
+//        UserDAO mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
+//                .allowMainThreadQueries()
+//                .fallbackToDestructiveMigration()
+//                .build()
+//                .getUserDAO();
+//        FlightDAO mFlightDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
+//                .allowMainThreadQueries()
+//                .fallbackToDestructiveMigration()
+//                .build()
+//                .getFlightDAO();
+//        TransactionDAO mTransactionDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
+//                .allowMainThreadQueries()
+//                .fallbackToDestructiveMigration()
+//                .build()
+//                .getTransactionDAO();
+//        ReservationDAO mReservationDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DBNAME)
+//                .allowMainThreadQueries()
+//                .fallbackToDestructiveMigration()
+//                .build()
+//                .getReservationDAO();
+//        mUserDAO.deleteAll();
+//        mFlightDAO.deleteAll();
+//        mTransactionDAO.deleteAll();
+//        mReservationDAO.deleteAll();
 
     }
 
@@ -91,20 +145,34 @@ public class MainActivity extends AppCompatActivity {
     public void reserveSeat(View view) {
         String username = mSharedPreferences.getString(USERNAME_KEY, "username");
 
-        //TODO: Fix
-        if (username.equals("admin2")) {
+        // Only customers can cancel seats.
+        if (!username.equals("admin2")) {
             Intent intent = new Intent(MainActivity.this, FlightCriteria.class);
             startActivity(intent);
         } else {
-            Toast t = Toast.makeText(this, R.string.mainAdminCannotReserve, Toast.LENGTH_SHORT);
+            Toast t = Toast.makeText(this, R.string.mainAdminCannotReserveCancel, Toast.LENGTH_SHORT);
             t.show();
         }
 
     }
 
+    public void cancelReservation(View view) {
+        String username = mSharedPreferences.getString(USERNAME_KEY, "username");
+
+        // Only customers can cancel flight reservations.
+        if (!username.equals("admin2")) {
+            Intent intent = new Intent(MainActivity.this, Cancellation.class);
+            startActivity(intent);
+        } else {
+            Toast t = Toast.makeText(this, R.string.mainAdminCannotReserveCancel, Toast.LENGTH_SHORT);
+            t.show();
+        }
+
+    }
     public void manageSystem(View view) {
         String username = mSharedPreferences.getString(USERNAME_KEY, "username");
 
+        // Only admin can manage system.
         if (username.equals("admin2")) {
             Intent intent = new Intent(MainActivity.this, TransactionLogs.class);
             startActivity(intent);

@@ -130,6 +130,8 @@ public class AddFlight extends AppCompatActivity {
 //        boolean areFieldsFilled = true;
 //        boolean isNumberUnique = true;
         Log.d("Flight", departureTimeString.toString());
+
+        // If all fields are filled and the flight number is unique, add the new flight to the list of flights.
         if (areFieldsFilled && isNumberUnique) {
             mFlightsDAO.insert(new Flight(number, departure, arrival, departureTimeString.toString(), capacity, price));
             mAlertBuilder = new AlertDialog.Builder(AddFlight.this);
@@ -159,7 +161,9 @@ public class AddFlight extends AppCompatActivity {
             mAlertBuilder.create();
             mAlertBuilder.show();
 
+            // Otherwise, show error message and reset all text fields.
         } else {
+            mAlertBuilder = new AlertDialog.Builder(AddFlight.this);
             if (!areFieldsFilled) {
                 mAlertBuilder.setMessage(R.string.flightAlertFieldsNotFilled);
             } else {

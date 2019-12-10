@@ -52,6 +52,7 @@ public class FlightCriteria extends AppCompatActivity {
         arrival = mArrival.getText().toString();
         tickets = Integer.parseInt(mTickets.getText().toString());
 
+        // User cannot reserve more than 7 tickets at a time.
         if (tickets > MAX_TICKETS) {
             mAlertBuilder.setMessage("Reservation cannot be made due to system restrictions");
             mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
     private static final String TAG = "LOGIN";
     private static final String USERNAME_KEY = "USERNAME_KEY";
 
-    TextView mTitle, mInstructions, mDisplay;
+    TextView mTitle, mInstructions;
 
     EditText mUsername, mPassword;
 
@@ -48,9 +48,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mTitle = findViewById(R.id.loginTitleTextView);
-        mDisplay = findViewById(R.id.loginDisplayTextView);
-
-        mDisplay.setMovementMethod(new ScrollingMovementMethod());
 
         mUsername = findViewById(R.id.loginUsernameEditText);
         mPassword = findViewById(R.id.loginPasswordEditText);
@@ -77,12 +74,10 @@ public class Login extends AppCompatActivity {
                 .build()
                 .getUserDAO();
 
-        refreshDisplay();
     }
 
     public void validateLogin(View view) {
         loginToSystem();
-        refreshDisplay();
 
 
     }
@@ -95,6 +90,7 @@ public class Login extends AppCompatActivity {
 
         boolean isLoginCorrect = isLoginCorrect(username, password);
 
+        // Use SharedPreferences for persistent login.
         if (isLoginCorrect) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putString(USERNAME_KEY, username);
@@ -144,18 +140,4 @@ public class Login extends AppCompatActivity {
     }
 
 
-    private void refreshDisplay() {
-        mUsers = mUserDAO.getUsers();
-        if (! mUsers.isEmpty() ) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (User user: mUsers) {
-                stringBuilder.append(user.toString());
-            }
-
-            mDisplay.setText(stringBuilder.toString());
-
-        } else {
-            mDisplay.setText("Empty log");
-        }
-    }
 }

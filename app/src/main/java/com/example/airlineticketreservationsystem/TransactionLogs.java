@@ -19,7 +19,7 @@ import java.util.List;
 public class TransactionLogs extends AppCompatActivity {
 
 
-    TextView mMainTitle, mCreateTitle, mReserveTitle, mCancelTitle, mCreateDisplay, mReserveDisplay, mCancelDisplay;
+    TextView mMainTitle, mCreateDisplay;
 
     Button mButton;
 
@@ -46,6 +46,7 @@ public class TransactionLogs extends AppCompatActivity {
 
     }
 
+    // Display transaction log
     private void refreshCreateDisplay() {
         mTransactions = mTransactionDAO.getTransaction();
         if (! mTransactions.isEmpty() ) {

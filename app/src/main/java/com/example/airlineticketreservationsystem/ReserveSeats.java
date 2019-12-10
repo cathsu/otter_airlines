@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,8 +35,9 @@ public class ReserveSeats extends AppCompatActivity {
     public static final String PRICE = "PRICE";
     public static final String USERNAME_KEY = "USERNAME_KEY";
 
-    TextView mDisplay;
+    TextView mTitle, mDisplay;
     EditText mFlight;
+    Button mButton;
 
     FlightDAO mFlightDAO;
     List<Flight> mFlights;
@@ -53,9 +55,11 @@ public class ReserveSeats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_seats);
 
+        mTitle = findViewById(R.id.reserveTitleTextView);
         mDisplay = findViewById(R.id.reserveDisplayTextView);
         mDisplay.setMovementMethod(new ScrollingMovementMethod());
         mFlight = findViewById(R.id.reserveFlightEditText);
+        mButton = findViewById(R.id.reserveButton);
 
         mSharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
         mAlertBuilder = new AlertDialog.Builder(ReserveSeats.this);
@@ -82,6 +86,7 @@ public class ReserveSeats extends AppCompatActivity {
 
     }
 
+    // Display all flights that meet the flight criteria
     public void display() {
         String departure, arrival;
         Integer tickets;
@@ -95,25 +100,17 @@ public class ReserveSeats extends AppCompatActivity {
         mFlights = mFlightDAO.findFlightsThatMeetCriteria(departure.trim(), arrival.trim(), tickets);
         mAllFlights = mFlightDAO.getFlights();
 
-//        StringBuilder stringBuilder = new StringBuilder();
-//        for (Flight flight: mAllFlights) {
-//            stringBuilder.append(flight);
-//        }
-//        mDisplay.setText(stringBuilder.toString());
-
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         if (!mFlights.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
-//            String s = String.format("%-12s%-12s%-12s%-12s%-12s%-12s", FLIGHT_NO, DEPARTURE, ARRIVAL, DEPARTURE_TIME, CAPACITY, PRICE);
-//            stringBuilder.append(s + "\n");
             for (Flight flight: mFlights) {
                 stringBuilder.append("FLIGHT NO: " + flight.getNumber() + "\n");
                 stringBuilder.append("Departure: " + flight.getDeparture() + " at " + flight.getDepartureTime() + "\n");
                 stringBuilder.append("Arrival: " + flight.getArrival() + "\n");
                 stringBuilder.append("Flight Capacity: " + flight.getCapacity() + "\n");
-                stringBuilder.append("Price: $" + decimalFormat.format(flight.getPrice()) + "\n");
-                stringBuilder.append("------------------------------------------------\n");
+                stringBuilder.append("Price of 1 ticket: $" + decimalFormat.format(flight.getPrice()) + "\n");
+                stringBuilder.append("------------------------------------------------------------\n");
 
             }
 
@@ -148,16 +145,16 @@ public class ReserveSeats extends AppCompatActivity {
         double totalCost = tickets*flight.getPrice();
 
 
-        Reservation reservation = new Reservation(username, flightNo, tickets, totalCost);
-        mReservationDAO.insert(reservation);
+        final Reservation reservation = new Reservation(username, flightNo, tickets, totalCost);
 
-        final String message = reservation.toString() + "\n" + "Departure: " + flight.getDeparture() + "\n"
-                + "Arrival: " + flight.getArrival() + "\n";
+
+        final String message = reservation.toString() + "Departure: " + flight.getDeparture() + "\n"
+                + "Arrival: " + flight.getArrival();
 
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
-        mAlertBuilder.setMessage("Username: " + username + "\n"
+        mAlertBuilder.setMessage("Customer's username: " + username + "\n"
                 + "Flight number: " + flightNo + "\n"
                 + "Departure: " + flight.getDeparture() + " at " + flight.getDepartureTime() + "\n"
                 + "Arrival: " + flight.getArrival() + "\n"
@@ -165,18 +162,62 @@ public class ReserveSeats extends AppCompatActivity {
                 + "Reservation number: " + reservation.getId() + "\n"
                 + "Total Amount $" + decimalFormat.format(totalCost));
 
+//        if (mReservationDAO.findReservationWithUsernameAndFlight(username, flightNo) != null ) {
+//            mAlertBuilder.setMessage("You've already made a reservation on this flight.");
+//            mAlertBuilder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    Intent intent = new Intent(ReserveSeats.this, MainActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
+//            mAlertBuilder.create();
+//            mAlertBuilder.show();
+//        } else {
+
+        // Confirm flight reservation
         mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mTransactionDAO.insert(new Transaction( username, getString(R.string.TYPE_RESERVE_SEAT), message));
+                mReservationDAO.insert(reservation);
+                Log.d("RESERVE SEATS", reservation.getUsername());
+                mTransactionDAO.insert(new Transaction(username, getString(R.string.TYPE_RESERVE_SEAT), message));
                 Intent intent = new Intent(ReserveSeats.this, MainActivity.class);
                 startActivity(intent);
 
             }
         });
 
+        // Cancel flight reservation
+        mAlertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mAlertBuilder = new AlertDialog.Builder(ReserveSeats.this);
+                mAlertBuilder.setMessage("You are trying to cancel the reservation. Please confirm your cancellation.");
+                mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mAlertBuilder = new AlertDialog.Builder(ReserveSeats.this);
+                        mAlertBuilder.setMessage("You failed to reserve a seat.");
+                        mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(ReserveSeats.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        mAlertBuilder.create();
+                        mAlertBuilder.show();
+                    }
+                });
+                mAlertBuilder.create();
+                mAlertBuilder.show();
+            }
+        });
+
         mAlertBuilder.create();
         mAlertBuilder.show();
+
 
 
 

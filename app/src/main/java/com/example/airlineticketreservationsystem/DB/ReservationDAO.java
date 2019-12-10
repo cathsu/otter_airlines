@@ -22,14 +22,22 @@ public interface ReservationDAO {
     @Delete
     void delete(Reservation reservation);
 
+    @Query("DELETE FROM Reservation") //Use [] to escape reserved keywords
+    void deleteAll();
+
     @Query("SELECT * FROM " + AppDatabase.RESERVATION_TABLE)
     List<Reservation> getReservation();
 
     @Query("SELECT * FROM " + AppDatabase.RESERVATION_TABLE + " WHERE mId = :reservationNumber")
-    Reservation findReservationWithNumber(String reservationNumber);
+    List<Reservation> findReservationWithNumber(String reservationNumber);
 
     @Query("SELECT * FROM " + AppDatabase.RESERVATION_TABLE + " WHERE mUsername = :username")
-    Reservation findReservationWithUsername(String username);
+    List<Reservation> findReservationWithUsername(String username);
+
+    @Query("SELECT * FROM " + AppDatabase.RESERVATION_TABLE + " WHERE mUsername = :username AND mFlightNo = :flightNo")
+    Reservation findReservationWithUsernameAndFlight(String username, String flightNo);
+
+
 
 
 }
